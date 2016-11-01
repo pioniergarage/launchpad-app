@@ -22,12 +22,4 @@
     @endforeach
     </tbody>
 </table>
-
-<hr>
-
-<form method="post">
-    {!! csrf_field() !!}
-    <textarea title="Nachricht" name="message" class="form-control"></textarea>
-    <button type="submit" class="btn btn-primary">Speichern</button>
-</form>
 @endsection

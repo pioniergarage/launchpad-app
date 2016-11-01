@@ -19,11 +19,12 @@
     </tbody>
 </table>
 
-<hr style="margin-top: 50px">
-<h2>Add new ranking</h2>
+<h2 style="margin-top: 50px">Add new ranking</h2>
 <form method="post">
     {!! csrf_field() !!}
-    <textarea title="Nachricht" name="message" class="form-control"></textarea>
-    <button type="submit" class="btn btn-primary">Speichern</button>
+    <textarea title="Nachricht" name="message" class="form-control" rows="10"></textarea>
+    <p>
+        <button type="submit" class="btn btn-primary form-control">Speichern</button>
+    </p>
 </form>
 @endsection

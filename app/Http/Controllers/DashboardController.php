@@ -27,7 +27,7 @@ class DashboardController extends Controller
             preg_match('`[0-9]+`', $match, $score);
 
             $data = [
-                'username' => $name[0],
+                'username' => str_replace('@', '', $name[0]),
                 'score' => $score[0],
             ];
 

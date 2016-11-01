@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
+<h1>Launchpad Ranking</h1>
 <table class="table">
     <thead>
     <tr>
@@ -18,8 +19,8 @@
     </tbody>
 </table>
 
-<hr>
-
+<hr style="margin-top: 50px">
+<h2>Add new ranking</h2>
 <form method="post">
     {!! csrf_field() !!}
     <textarea title="Nachricht" name="message" class="form-control"></textarea>

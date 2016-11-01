@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-    <a class="navbar-brand" href="#">Launchpad App</a>
+    <a class="navbar-brand" href="/">Launchpad App</a>
     <ul class="nav navbar-nav">
         <li class="nav-item active">
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>

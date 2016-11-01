@@ -2,6 +2,9 @@
 
 @section('content')
 <h1>{{ $username }}</h1>
+<p>
+    <a href="{!! action('DashboardController@index') !!}">back to overview</a>
+</p>
 
 <table class="table">
     <thead>

@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Ranking;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $ranking = Session::get('ranking', []);
+        $ranking = Ranking::all();
 
         return view('welcome', ['ranking' => $ranking]);
     }
@@ -20,21 +19,24 @@ class DashboardController extends Controller
         $plaintext = $request->input('message');
 
         preg_match_all('/\@[A-z]* `[0-9]+`/', $plaintext, $matches);
-        //dd($matches);
 
-        $ranking = [];
         foreach ($matches[0] as $match) {
             preg_match('/\@[A-z]*/', $match, $name);
 
             preg_match('`[0-9]+`', $match, $score);
 
-            $ranking[] = [
-                'name' => $name[0],
+            $data = [
+                'username' => $name[0],
                 'score' => $score[0],
             ];
-        }
 
-        Session::put('ranking', $ranking);
+            $ranking = Ranking::where('username', $data['username'])->first();
+            if ($ranking) {
+                $ranking->update($data);
+            } else {
+                Ranking::create($data);
+            }
+        }
 
         return redirect('/');
     }

@@ -10,22 +10,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //SELECT rankings.*
-        //FROM rankings
-        //JOIN (
-        //    SELECT username, MAX(created_at) AS max_created_at
-        //    FROM rankings
-        //    GROUP BY username
-        //) newest_rankings ON rankings.created_at = max_created_at AND newest_rankings.username = rankings.username
-        $query = 'SELECT rankings.*
-FROM rankings
-JOIN (
-	SELECT username, MAX(created_at) AS max_created_at 
-	FROM rankings 
-	GROUP BY username
-) newest_rankings ON rankings.created_at = max_created_at AND newest_rankings.username = rankings.username
-ORDER BY score DESC';
-        $ranking = DB::select(DB::raw($query));
+        $ranking = $this->getCurrentRankings();
 
         return view('welcome', ['ranking' => $ranking]);
     }
@@ -50,5 +35,31 @@ ORDER BY score DESC';
         }
 
         return redirect('/');
+    }
+
+    public function userDetail($username)
+    {
+        $rankings = Ranking::query()
+            ->where('username', $username)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
+        return view('users.view', ['username' => $username, 'rankings' => $rankings]);
+    }
+
+    public function getCurrentRankings()
+    {
+        $query = 'SELECT rankings.*
+            FROM rankings
+            JOIN (
+                SELECT username, MAX(created_at) AS max_created_at 
+                FROM rankings 
+                GROUP BY username
+            ) newest_rankings ON rankings.created_at = max_created_at AND newest_rankings.username = rankings.username
+            ORDER BY score DESC';
+
+        $ranking = DB::select(DB::raw($query));
+
+        return $ranking;
     }
 }

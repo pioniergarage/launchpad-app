@@ -13,4 +13,6 @@
 
 Route::get('/', 'DashboardController@index');
 
+Route::get('/user/{username}', 'DashboardController@userDetail');
+
 Route::post('/', 'DashboardController@postMessage');

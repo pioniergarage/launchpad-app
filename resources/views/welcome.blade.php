@@ -28,7 +28,7 @@
                     <tbody>
                     @foreach($ranking as $rank)
                     <tr>
-                        <td>{{ $rank->username }}</td>
+                        <td><a href="{!! action('DashboardController@userDetail', ['username' => $rank->username]) !!}">{{ $rank->username }}</a></td>
                         <td>{{ $rank->score }}</td>
                     </tr>
                     @endforeach

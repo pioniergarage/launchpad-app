@@ -28,8 +28,8 @@
                     <tbody>
                     @foreach($ranking as $rank)
                     <tr>
-                        <td>{{ $rank['username'] }}</td>
-                        <td>{{ $rank['score'] }}</td>
+                        <td>{{ $rank->username }}</td>
+                        <td>{{ $rank->score }}</td>
                     </tr>
                     @endforeach
                     </tbody>

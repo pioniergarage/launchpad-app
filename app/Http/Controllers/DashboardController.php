@@ -4,12 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Ranking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $ranking = Ranking::all();
+        //SELECT rankings.*
+        //FROM rankings
+        //JOIN (
+        //    SELECT username, MAX(created_at) AS max_created_at
+        //    FROM rankings
+        //    GROUP BY username
+        //) newest_rankings ON rankings.created_at = max_created_at AND newest_rankings.username = rankings.username
+        $query = 'SELECT rankings.*
+FROM rankings
+JOIN (
+	SELECT username, MAX(created_at) AS max_created_at 
+	FROM rankings 
+	GROUP BY username
+) newest_rankings ON rankings.created_at = max_created_at AND newest_rankings.username = rankings.username
+ORDER BY score DESC';
+        $ranking = DB::select(DB::raw($query));
 
         return view('welcome', ['ranking' => $ranking]);
     }
@@ -30,12 +46,7 @@ class DashboardController extends Controller
                 'score' => $score[0],
             ];
 
-            $ranking = Ranking::where('username', $data['username'])->first();
-            if ($ranking) {
-                $ranking->update($data);
-            } else {
-                Ranking::create($data);
-            }
+            Ranking::create($data);
         }
 
         return redirect('/');

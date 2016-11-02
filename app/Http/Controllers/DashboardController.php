@@ -6,7 +6,6 @@ use App\Services\Ranking;
 use App\Services\Slack;
 use App\SlackProp;
 use App\SlackUser;
-use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -26,14 +25,19 @@ class DashboardController extends Controller
 
     public function slack()
     {
-        $newestBeforeUpdate = SlackProp::query()->orderBy('created_at', 'DESC')->value('created_at');
+        $newestBeforeUpdate = $this->getDateOfLatestProp();
         Slack::importProps();
-        $newestAfterUpdate = SlackProp::query()->orderBy('created_at', 'DESC')->value('created_at');
+        $newestAfterUpdate = $this->getDateOfLatestProp();
 
         if ($newestAfterUpdate->gt($newestBeforeUpdate)) {
             Slack::sendRanking();
         }
 
         return redirect()->back();
+    }
+
+    public function getDateOfLatestProp()
+    {
+        return SlackProp::query()->orderBy('created_at', 'DESC')->value('created_at');
     }
 }

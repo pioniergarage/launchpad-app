@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Services\Slack;
 use App\SlackUser;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $ranking = DB::select(DB::raw('SELECT receiver_id AS username, COUNT(*) AS score FROM slack_props GROUP BY receiver_id'));
+        $query = 'SELECT receiver_id AS username, COUNT(*) AS score FROM slack_props GROUP BY receiver_id';
+        $ranking = DB::select(DB::raw($query));
 
         return view('welcome', ['ranking' => $ranking]);
     }
@@ -22,8 +22,9 @@ class DashboardController extends Controller
         return view('users.view', compact('user'));
     }
 
-    public function slackTest()
+    public function slack()
     {
         Slack::importProps();
+        return redirect()->back();
     }
 }

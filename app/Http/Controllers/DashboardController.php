@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Ranking;
+use App\Services\Slack;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -45,6 +46,11 @@ class DashboardController extends Controller
             ->get();
 
         return view('users.view', ['username' => $username, 'rankings' => $rankings]);
+    }
+
+    public function slackTest()
+    {
+        Slack::importProps();
     }
 
     public function getCurrentRankings()

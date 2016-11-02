@@ -15,4 +15,6 @@ Route::get('/', 'DashboardController@index');
 
 Route::get('/user/{username}', 'DashboardController@userDetail');
 
+Route::get('/slack', 'DashboardController@slackTest');
+
 Route::post('/', 'DashboardController@postMessage');

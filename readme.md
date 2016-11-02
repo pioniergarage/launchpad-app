@@ -8,11 +8,6 @@ This app keeps track of Growbot rankings by parsing the Growbot output and stori
 * Fill out the .env file
 * Run `php artisan migrate`
 
-## Add a ranking
+## Update rankings
 
-Go to slack, write to Growbot:
-```
-stats all
-```
-
-Copy the output, paste it into the form and save. The new ranking should be saved in the database.
+Just open http://{your-url}/slack to import the rankings.

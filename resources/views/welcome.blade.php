@@ -12,19 +12,10 @@
     <tbody>
     @foreach($ranking as $rank)
     <tr>
-        <td><a href="{!! action('DashboardController@userDetail', ['username' => $rank->username]) !!}">{{ $rank->username }}</a></td>
+        <td><a href="{!! action('DashboardController@userDetail', ['username' => $rank->username]) !!}">{{ \App\SlackUser::find($rank->username)->name }}</a></td>
         <td>{{ $rank->score }}</td>
     </tr>
     @endforeach
     </tbody>
 </table>
-
-<h2 style="margin-top: 50px">Add new ranking</h2>
-<form method="post">
-    {!! csrf_field() !!}
-    <textarea title="Nachricht" name="message" class="form-control" rows="10"></textarea>
-    <p>
-        <button type="submit" class="btn btn-primary form-control">Speichern</button>
-    </p>
-</form>
 @endsection

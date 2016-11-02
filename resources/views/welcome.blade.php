@@ -13,8 +13,8 @@
         @foreach($ranking as $rank)
         <tr>
             <td>
-                <a href="{!! action('DashboardController@userDetail', ['username' => $rank->username]) !!}">
-                    {{ \App\SlackUser::find($rank->username)->name }}
+                <a href="{!! action('DashboardController@userDetail', ['id' => $rank->user->id]) !!}">
+                    {{ $rank->user->name }}
                 </a>
             </td>
             <td>{{ $rank->score }}</td>

@@ -9,7 +9,7 @@ class Slack
 {
     public static function importProps()
     {
-        $channelHistoryEndpoint = 'https://slack.com/api/channels.history?token=' . env('SLACK_TOKEN') . '&channel=C1U9CKDQD&sort=timestamp&sort_dir=asc&count=1000';
+        $channelHistoryEndpoint = 'https://slack.com/api/channels.history?token=' . env('SLACK_TOKEN') . '&channel=' . env('SLACK_CHANNEL') . '&sort=timestamp&sort_dir=asc&count=1000';
 
         $resultPlain = file_get_contents($channelHistoryEndpoint);
         $resultJson = json_decode($resultPlain);
@@ -86,5 +86,15 @@ class Slack
     {
         $endpoint = 'https://slack.com/api/users.info?token=' . env('SLACK_TOKEN') . '&user=' . $id;
         return json_decode(file_get_contents($endpoint))->user;
+    }
+
+    public static function sendRanking()
+    {
+        $ranking = Ranking::getRanking();
+        $rankingWithText = array_map(function($rank){return '@' . $rank->user->name . ': ' . $rank->score;}, $ranking);
+        $text = "Das aktuelle Ranking ist:\n" . implode("\n", $rankingWithText);
+
+        $endpoint = 'https://slack.com/api/chat.postMessage?token=' . env('SLACK_TOKEN') . '&channel=' . env('SLACK_CHANNEL') . '&parse=full&text=' . urlencode($text);
+        return json_decode(file_get_contents($endpoint));
     }
 }

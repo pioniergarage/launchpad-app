@@ -32,8 +32,8 @@
             <ul>
             @foreach($props as $prop)
                 <li>
-                    {{ $prop->receiver->name }}
-                    {{ $prop->activity }}
+                    {{ $prop->receiver->real_name }}<br>
+                    <small>{{ $prop->activity }} ({{ $prop->created_at->diffForHumans() }})</small>
                 </li>
             @endforeach
             </ul>

@@ -1,18 +1,18 @@
 @extends('layouts.master')
 
-@section('title', $user->name)
+@section('title', $user->getName())
 @section('subtitle', 'User detail')
 
 @section('breadcrumbs')
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li>Users</li>
-        <li class="active">{{ $user->name }}</li>
+        <li class="active">{{ $user->getName() }}</li>
     </ol>
 @endsection
 
 @section('content')
-    <h1>{{ $user->name }}</h1>
+    <h1>{{ $user->getName() }}</h1>
     <p>
         <a href="{!! action('DashboardController@index') !!}">back to overview</a>
     </p>

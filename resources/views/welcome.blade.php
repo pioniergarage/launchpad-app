@@ -49,7 +49,7 @@
                             <tr>
                                 <td>
                                     <a href="{!! action('DashboardController@userDetail', ['id' => $rank->user->id]) !!}">
-                                        {{ $rank->user->name }}
+                                        {{ $rank->user->getName() }}
                                     </a>
                                 </td>
                                 <td>{{ $rank->score }}</td>
@@ -74,7 +74,7 @@
                     <ul>
                         @foreach($props as $prop)
                             <li>
-                                {{ $prop->receiver->real_name }}<br>
+                                {{ $prop->receiver->getName() }}<br>
                                 <small>{{ $prop->activity }} ({{ $prop->created_at->diffForHumans() }})</small>
                             </li>
                         @endforeach

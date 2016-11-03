@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class DoorController extends Controller
 {
+    /**
+     * API Endpoint for the Arduino.
+     * @param Request $request
+     * @return array
+     */
     public function changeStatus(Request $request)
     {
         $doorStatusWritten = $request->input('door');
@@ -25,29 +30,56 @@ class DoorController extends Controller
         }
 
         $isOpen = $doorStatusWrittenToBool[$doorStatusWritten];
+        $openingTime = $this->changeDoorStatus($isOpen);
 
+        return $openingTime;
+    }
+
+    /**
+     * @param $isOpen
+     * @return OpeningTime
+     */
+    public function changeDoorStatus($isOpen)
+    {
         if ($isOpen) {
-            // create new opening (only when last one was closed)
-            $openingTime = $this->getLastOpeningTime();
-            $isLaunchpadClosed = $openingTime ? $openingTime->close_at : true;
-
-            if ($isLaunchpadClosed) {
-                $openingTime = OpeningTime::create([
-                    'open_at' => Carbon::now(),
-                    'close_at' => null,
-                    'is_public' => true,
-                    'is_visible' => true,
-                ]);
-            } else {
-                // do nothing as it is already open
-            }
-        } else {
-            // close last opening time
-            $openingTime = $this->getLastOpeningTime();
-            $openingTime->close_at = Carbon::now();
-            $openingTime->save();
+            return $this->open();
         }
 
+        return $this->close();
+    }
+
+    /**
+     * @return OpeningTime
+     */
+    public function open()
+    {
+        // create new opening (only when last one was closed)
+        $openingTime = $this->getLastOpeningTime();
+        $isLaunchpadClosed = $openingTime ? $openingTime->close_at : true;
+
+        if ($isLaunchpadClosed) {
+            $openingTime = OpeningTime::create([
+                'open_at' => Carbon::now(),
+                'close_at' => null,
+                'is_public' => true,
+                'is_visible' => true,
+            ]);
+        } else {
+            // do nothing as it is already open
+        }
+
+        return $openingTime;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function close()
+    {
+        // close last opening time
+        $openingTime = $this->getLastOpeningTime();
+        $openingTime->close_at = Carbon::now();
+        $openingTime->save();
         return $openingTime;
     }
 

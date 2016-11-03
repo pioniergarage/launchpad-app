@@ -75,12 +75,18 @@
                 <div class="box-body text-center">
                     @if(\App\OpeningTime::getLast() && \App\OpeningTime::getLast()->isOpen())
                         <p class="text-success">
-                            Das Launchpad ist seit {{ \App\OpeningTime::getLast()->open_at->format('H:i') }} geöffnet
+                            Das Launchpad ist seit {{ \App\OpeningTime::getLast()->open_at->format('H:i') }} geöffnet.
+                        </p>
+                        <p>
+                            <a href="{!! action('DoorController@changeStatus', ['door' => 'closed']) !!}" class="btn btn-default">schließen</a>
                         </p>
                         <img class="" src="/img/status/open.png" alt="Launchpad ist geöffnet">
                     @else
                         <p class="text-danger">
-                            Das Launchpad ist seit {{ \App\OpeningTime::getLast()->open_at->format('H:i') }} geschlossen
+                            Das Launchpad ist seit {{ \App\OpeningTime::getLast()->close_at->format('H:i') }} geschlossen.
+                        </p>
+                        <p>
+                            <a href="{!! action('DoorController@changeStatus', ['door' => 'open']) !!}" class="btn btn-default">öffnen</a>
                         </p>
                         <img class="" src="/img/status/closed.png" alt="Launchpad ist geschlossen">
                     @endif

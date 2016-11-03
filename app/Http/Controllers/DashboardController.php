@@ -29,7 +29,7 @@ class DashboardController extends Controller
         Slack::importProps();
         $newestAfterUpdate = $this->getDateOfLatestProp();
 
-        if ($newestAfterUpdate->gt($newestBeforeUpdate)) {
+        if ($newestBeforeUpdate != null && $newestAfterUpdate->gt($newestBeforeUpdate)) {
             Slack::sendRanking();
         }
 

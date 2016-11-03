@@ -25,19 +25,7 @@ class DashboardController extends Controller
 
     public function slack()
     {
-        $newestBeforeUpdate = $this->getDateOfLatestProp();
-        Slack::importProps();
-        $newestAfterUpdate = $this->getDateOfLatestProp();
-
-        if ($newestBeforeUpdate != null && $newestAfterUpdate->gt($newestBeforeUpdate)) {
-            Slack::sendRanking();
-        }
-
+        Slack::beGrowbot();
         return redirect()->back();
-    }
-
-    public function getDateOfLatestProp()
-    {
-        return SlackProp::query()->orderBy('created_at', 'DESC')->value('created_at');
     }
 }

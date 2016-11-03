@@ -13,7 +13,7 @@ class DoorController extends Controller
      * @param Request $request
      * @return array
      */
-    public function changeStatus(Request $request)
+    public function changeStatusLegacy(Request $request)
     {
         $doorStatusWritten = $request->input('door');
         if (! $doorStatusWritten) {
@@ -36,12 +36,28 @@ class DoorController extends Controller
     }
 
     /**
-     * @param $isOpen
+     * Method to let a browser-based user open/close the door.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function changeStatus()
+    {
+        if ($this->getLastOpeningTime()->isOpen()) {
+            $this->close();
+            return redirect()->back();
+        }
+
+        $this->open();
+        return redirect()->back();
+    }
+
+    /**
+     * @param $toOpen
      * @return OpeningTime
      */
-    public function changeDoorStatus($isOpen)
+    public function changeDoorStatus($toOpen)
     {
-        if ($isOpen) {
+        if ($toOpen) {
             return $this->open();
         }
 
@@ -84,10 +100,12 @@ class DoorController extends Controller
     }
 
     /**
-     * @return mixed
+     * @return OpeningTime
      */
     public function getLastOpeningTime()
     {
-        return OpeningTime::query()->orderBy('open_at', 'DESC')->first();
+        return OpeningTime::query()
+            ->orderBy('open_at', 'DESC')
+            ->first();
     }
 }

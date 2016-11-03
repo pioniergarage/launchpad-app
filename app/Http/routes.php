@@ -17,6 +17,7 @@ Route::get('/user/{username}', 'DashboardController@userDetail');
 
 Route::get('/slack', 'DashboardController@slack');
 
-Route::get('/door/change-status', 'DoorController@changeStatus');
+Route::get('api/door/change-status', 'DoorController@changeStatusLegacy');
+Route::get('door/change-status', 'DoorController@changeStatus');
 
 Route::post('/', 'DashboardController@postMessage');

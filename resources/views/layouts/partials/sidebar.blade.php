@@ -28,7 +28,16 @@
     <ul class="sidebar-menu">
         <li class="header">MAIN MENU</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Dashboard</span></a></li>
+        <li class="active">
+            <a href="/">
+                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="{!! action('OpeningTimeController@index') !!}">
+                <i class="fa fa-clock-o"></i> <span>Öffnungszeiten</span>
+            </a>
+        </li>
     </ul>
     <!-- /.sidebar-menu -->
 </section>

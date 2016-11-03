@@ -2,10 +2,19 @@
 
 @section('content')
     <h1>Launchpad Dashboard</h1>
-    <h2>Das aktuelle Ranking</h2>
 
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-4">
+            @if(\App\OpeningTime::getLast() && \App\OpeningTime::getLast()->isOpen())
+                <p class="text-success">
+                    Das Launchpad ist geöffnet seit {{ \App\OpeningTime::getLast()->created_at->toTimeString() }}
+                </p>
+                <img class="img-responsive" src="/img/status/open.png" alt="Launchpad ist geöffnet">
+            @else
+                <img class="img-responsive" src="/img/status/closed.png" alt="Launchpad ist geschlossen">
+            @endif
+        </div>
+        <div class="col-md-4">
             <table class="table">
                 <thead>
                 <tr>
@@ -40,9 +49,11 @@
         </div>
     </div>
 
+
+    <hr>
     <p>
         <a class="btn btn-primary" href="{!! action('DashboardController@slack') !!}">
-            Import from Slack
+            Rankings aus Slack importieren
         </a>
     </p>
 @endsection

@@ -7,10 +7,13 @@
         <div class="col-md-4">
             @if(\App\OpeningTime::getLast() && \App\OpeningTime::getLast()->isOpen())
                 <p class="text-success">
-                    Das Launchpad ist geöffnet seit {{ \App\OpeningTime::getLast()->created_at->toTimeString() }}
+                    Das Launchpad ist geöffnet seit {{ \App\OpeningTime::getLast()->open_at->toTimeString() }}
                 </p>
                 <img class="img-responsive" src="/img/status/open.png" alt="Launchpad ist geöffnet">
             @else
+                <p class="text-danger">
+                    Das Launchpad ist geschlossen seit {{ \App\OpeningTime::getLast()->close_at->toTimeString() }}
+                </p>
                 <img class="img-responsive" src="/img/status/closed.png" alt="Launchpad ist geschlossen">
             @endif
         </div>

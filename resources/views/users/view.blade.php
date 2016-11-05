@@ -18,7 +18,7 @@
     </p>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <table class="table">
                 <thead>
                 <tr>
@@ -36,7 +36,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-7">
             <!-- Chart area -->
             @include('users.partials.chart')
         </div>

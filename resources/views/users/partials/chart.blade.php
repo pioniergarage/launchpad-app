@@ -1,30 +1,109 @@
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.min.js"></script>
 <!-- TODO correct source integration -->
-<div id="myfirstchart" style="height: 250px;"></div>
-<script>
-    new Morris.Line({
-        // ID of the element in which to draw the chart.
-        element: 'myfirstchart',
-        // Chart data records -- each entry in this array corresponds to a point on
-        // the chart.
-        data: [
-            { year: '2008', value: 20 },
-            { year: '2009', value: 10 },
-            { year: '2010', value: 5 },
-            { year: '2011', value: 5 },
-            { year: '2012', value: 20 }
-        ],
-        // The name of the data record attribute that contains x-values.
-        xkey: 'year',
-        // A list of names of data record attributes that contain y-values.
-        ykeys: ['value'],
-        // Labels for the ykeys -- will be displayed when you hover over the
-        // chart.
-        labels: ['Value']
+
+<canvas id="scoreChart"></canvas>
+
+<script type="text/javascript">
+
+    var ctx = document.getElementById("scoreChart");
+    var config = {
+        type: 'line',
+        data: {
+
+            // TODO insert php variable with timestamp (array[string])
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: "Score",
+                backgroundColor: 'rgba(221, 75, 57, 1)',
+                borderColor: 'rgba(221, 75, 57, 0.4)',
+
+                // TODO insert php variable with score values (array[object})
+                data: [
+                    2,
+                    5,
+                    7,
+                    15,
+                    21,
+                    25,
+                    27,
+                ],
+                fill: false,
+            }]
+        },
+        options: {
+            legend: {
+                display: false,
+            },
+            responsive: true,
+            title: {
+                display: true,
+                text: 'Score Board',
+                fontSize: 16,
+            },
+            tooltips: {
+                mode: 'x-axis',
+                intersect: false,
+                xPadding: 10,
+                yPadding: 10,
+            },
+            hover: {
+                mode: 'single',
+                intersect: false,
+            },
+            scales: {
+                xAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Date'
+                    }
+                }],
+                yAxes: [{
+                    display: true,
+                    scaleLabel: {
+                        display: true,
+                        labelString: 'Score'
+                    },
+                    stacked: true,
+                }]
+            }
+        }
+    };
+
+    var scoreChart = new Chart(ctx, config);
+
+    // Define a plugin to provide data labels
+    Chart.plugins.register({
+        afterDatasetsDraw: function (chartInstance, easing) {
+            // To only draw at the end of animation, check for easing === 1
+            var ctx = chartInstance.chart.ctx;
+
+            chartInstance.data.datasets.forEach(function (dataset, i) {
+                var meta = chartInstance.getDatasetMeta(i);
+                if (!meta.hidden) {
+                    meta.data.forEach(function (element, index) {
+                        // Draw the text in black, with the specified font
+                        ctx.fillStyle = 'rgb(0, 0, 0)';
+
+                        var fontSize = 16;
+                        var fontStyle = 'normal';
+                        var fontFamily = 'Helvetica Neue';
+                        ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
+
+                        // Just naively convert to string for now
+                        var dataString = dataset.data[index].toString();
+
+                        // Make sure alignment settings are correct
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+
+                        var padding = 5;
+                        var position = element.tooltipPosition();
+                        ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                    });
+                }
+            });
+        }
     });
+
 </script>
-<!-- TODO chart data input -->
-<!-- erstellt mit morris.js -->

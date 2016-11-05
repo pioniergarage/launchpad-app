@@ -7,6 +7,26 @@ use App\SlackUser;
 
 class Slack
 {
+    /**
+     * Import data from Slack and send ranking to Slack.
+     * @return boolean Rankings sent
+     */
+    public static function beGrowbot()
+    {
+        $newestBeforeUpdate = SlackProp::latest() ? SlackProp::latest()->created_at : null;
+        self::importProps();
+        $newestAfterUpdate = SlackProp::latest() ? SlackProp::latest()->created_at : null;
+
+        // send ranking if new props were added
+        if ($newestBeforeUpdate != null && $newestAfterUpdate != null
+            && $newestAfterUpdate->gt($newestBeforeUpdate)) {
+            self::sendRanking();
+            return true;
+        }
+
+        return false;
+    }
+
     public static function importProps()
     {
         $channelHistoryEndpoint = 'https://slack.com/api/channels.history?token=' . env('SLACK_TOKEN') . '&channel=' . env('SLACK_CHANNEL') . '&sort=timestamp&sort_dir=asc&count=1000';

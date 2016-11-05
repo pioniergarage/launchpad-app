@@ -5,7 +5,7 @@
 
 @section('breadcrumbs')
     <ol class="breadcrumb">
-        <li><a href="/"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{ asset('/') }}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active">Öffnungszeiten</li>
     </ol>
 @endsection

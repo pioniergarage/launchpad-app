@@ -17,20 +17,28 @@
         <a href="{!! action('DashboardController@index') !!}">back to overview</a>
     </p>
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Aktivität</th>
-            <th>Datum</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($user->receivedProps as $props)
-            <tr>
-                <td>{{ $props->activity }}</td>
-                <td>{{ $props->created_at }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Aktivität</th>
+                    <th>Datum</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($user->receivedProps as $props)
+                    <tr>
+                        <td>{{ $props->activity }}</td>
+                        <td>{{ $props->created_at }}</td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <!-- Chart area -->
+            @include('users.partials.chart')
+        </div>
+    </div>
 @endsection

@@ -48,8 +48,8 @@
     <aside class="main-sidebar">
 
         <!-- sidebar: style can be found in sidebar.less -->
-        @include('layouts.partials.sidebar')
-        <!-- /.sidebar -->
+    @include('layouts.partials.sidebar')
+    <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
@@ -75,11 +75,11 @@
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-    @include('layouts.partials.footer')
+@include('layouts.partials.footer')
 
-    <!-- Control Sidebar -->
-    @include('layouts.partials.controlsidebar')
-    <!-- /.control-sidebar -->
+<!-- Control Sidebar -->
+@include('layouts.partials.controlsidebar')
+<!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>
@@ -95,7 +95,13 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('/dist/js/app.min.js') }}"></script>
 <!-- Autoreload feature -->
-<script src="{{ asset('/dist/js/autoreload.min.js') }}"></script>
+<script>
+    $(document).ready(function () {
+        setInterval(function () {
+            window.location.reload(false);
+        }, 60000);
+    });
+</script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the

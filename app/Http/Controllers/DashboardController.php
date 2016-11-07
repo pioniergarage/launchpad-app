@@ -12,7 +12,11 @@ class DashboardController extends Controller
     public function index()
     {
         $ranking = Ranking::getRanking();
-        $props = SlackProp::query()->orderBy('created_at', 'DESC')->take(5)->get();
+
+        $props = SlackProp::query()
+            ->orderBy('created_at', 'DESC')
+            ->take(5)
+            ->get();
 
         return view('welcome', compact('ranking', 'props'));
     }
@@ -20,7 +24,17 @@ class DashboardController extends Controller
     public function userDetail($username)
     {
         $user = SlackUser::find($username);
-        return view('users.view', compact('user'));
+        $propsReceived = $user->receivedProps()
+            ->orderBy('created_at', 'DESC')
+            ->take(10)
+            ->get();
+
+        $propsGiven = $user->givenProps()
+            ->orderBy('created_at', 'DESC')
+            ->take(10)
+            ->get();
+
+        return view('users.view', compact('user', 'propsReceived', 'propsGiven'));
     }
 
     public function slack()

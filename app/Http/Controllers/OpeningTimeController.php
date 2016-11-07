@@ -16,4 +16,11 @@ class OpeningTimeController extends Controller
 
         return view('opening-times.index', compact('openingTimes'));
     }
+
+    public function apiCurrent()
+    {
+        return OpeningTime::query()
+            ->orderBy('open_at', 'DESC')
+            ->first();
+    }
 }

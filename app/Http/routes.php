@@ -21,6 +21,8 @@ Route::get('/slack', 'DashboardController@slack');
 
 // opening/closing
 Route::resource('opening-times', 'OpeningTimeController');
+Route::get('api/opening-times/current', 'OpeningTimeController@apiCurrent');
 
 Route::get('api/door/change-status', 'DoorController@changeStatusLegacy');
 Route::get('door/change-status', 'DoorController@changeStatus');
+

@@ -48,8 +48,8 @@
                         <td>{{ $props->created_at }}</td>
                     </tr>
                 @endforeach
+                <?php dd($score); ?>
 
-                <?php dd($data); ?>
                 </tbody>
             </table>
         </div>

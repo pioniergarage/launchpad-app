@@ -59,6 +59,7 @@
             <h1>
                 @yield('title', 'Untitled Page')
                 <small>@yield('subtitle', 'No description given')</small>
+                <script async defer src="https://launchpad-slack-inviter.herokuapp.com/slackin.js?large"></script>
             </h1>
             @yield('breadcrumbs')
         </section>

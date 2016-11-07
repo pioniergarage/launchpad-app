@@ -27,12 +27,29 @@
                 </tr>
                 </thead>
                 <tbody>
+
+                <?php
+                    $data = array();
+                    $score = array();
+                    // create array
+                ?>
+
                 @foreach($user->receivedProps as $props)
+
+                <?php
+                    array_push($data, $props->created_at);
+                    //save data to array
+                    array_push($score, count($data));
+                    // count array-length to get the current score
+                ?>
+
                     <tr>
                         <td>{{ $props->activity }}</td>
                         <td>{{ $props->created_at }}</td>
                     </tr>
                 @endforeach
+
+                <?php dd($data); ?>
                 </tbody>
             </table>
         </div>

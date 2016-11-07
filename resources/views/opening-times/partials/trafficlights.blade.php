@@ -12,7 +12,7 @@
             <p>
                 <a href="{!! action('DoorController@changeStatus') !!}" class="btn btn-default">schließen</a>
             </p>
-            <img class="" src="{{ asset('/img/status/open.png') }}" alt="Launchpad ist geöffnet">
+            <img class="traffic-light" src="{{ asset('/img/status/open.png') }}" alt="Launchpad ist geöffnet">
         @elseif(\App\OpeningTime::getLast() != null)
             <p class="text-danger">
                 Das Launchpad ist seit {{ \App\OpeningTime::getLast()->close_at->format('H:i') }} Uhr geschlossen.
@@ -20,12 +20,12 @@
             <p>
                 <a href="{!! action('DoorController@changeStatus') !!}" class="btn btn-default">öffnen</a>
             </p>
-            <img class="" src="{{ asset('/img/status/closed.png') }}" alt="Launchpad ist geschlossen">
+            <img class="traffic-light" src="{{ asset('/img/status/closed.png') }}" alt="Launchpad ist geschlossen">
         @else
             <p class="text-danger">
                 Das Launchpad ist geschlossen.
             </p>
-            <img class="" src="{{ asset('/img/status/closed.png') }}" alt="Launchpad ist geschlossen">
+            <img class="traffic-light" src="{{ asset('/img/status/closed.png') }}" alt="Launchpad ist geschlossen">
         @endif
     </div>
     <!-- /.box-body -->

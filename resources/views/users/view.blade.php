@@ -59,4 +59,11 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <!-- Chart area -->
+            @include('users.partials.chart')
+        </div>
+    </div>
 @endsection

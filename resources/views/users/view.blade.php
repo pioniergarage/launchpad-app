@@ -12,48 +12,56 @@
 @endsection
 
 @section('content')
-    <h1>{{ $user->getName() }}</h1>
-    <p>
-        <a href="{!! action('DashboardController@index') !!}">back to overview</a>
-    </p>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <i class="fa fa-star"></i>
+                    <h3 class="box-title">Die letzten erhaltenen Props</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table">
+                        <tbody>
+                        @foreach($propsReceived as $props)
+                            <tr>
+                                <td>{{ $props->activity }}</td>
+                                <td>{{ $props->created_at->diffForHumans() }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <i class="fa fa-star"></i>
+                    <h3 class="box-title">Die letzten verteilten Props</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <table class="table">
+                        <tbody>
+                        @foreach($propsGiven as $props)
+                            <tr>
+                                <td>{{ $props->receiver->getName() }}</td>
+                                <td>{{ $props->activity }}</td>
+                                <td>{{ $props->created_at->diffForHumans() }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
 
     <div class="row">
-        <div class="col-md-5">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Aktivität</th>
-                    <th>Datum</th>
-                </tr>
-                </thead>
-                <tbody>
-
-                <?php
-                    $data = array();
-                    $score = array();
-                    // create array
-                ?>
-
-                @foreach($user->receivedProps as $props)
-
-                <?php
-                    array_push($data, $props->created_at);
-                    //save data to array
-                    array_push($score, count($data));
-                    // count array-length to get the current score
-                ?>
-
-                    <tr>
-                        <td>{{ $props->activity }}</td>
-                        <td>{{ $props->created_at }}</td>
-                    </tr>
-                @endforeach
-                <?php dd($score); ?>
-
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-7">
+        <div class="col-md-12">
             <!-- Chart area -->
             @include('users.partials.chart')
         </div>

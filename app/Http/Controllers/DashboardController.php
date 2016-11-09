@@ -24,6 +24,8 @@ class DashboardController extends Controller
     public function userDetail($username)
     {
         $user = SlackUser::find($username);
+        $scoreboard  = $user->getReceivedPropsPerMonth();
+
         $propsReceived = $user->receivedProps()
             ->orderBy('created_at', 'DESC')
             ->take(10)
@@ -34,7 +36,7 @@ class DashboardController extends Controller
             ->take(10)
             ->get();
 
-        return view('users.view', compact('user', 'propsReceived', 'propsGiven'));
+        return view('users.view', compact('user', 'propsReceived', 'propsGiven','scoreboard'));
     }
 
     public function slack()

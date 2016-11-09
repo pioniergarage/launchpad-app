@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class SlackUser extends Model
 {
@@ -23,5 +24,10 @@ class SlackUser extends Model
     public function getName()
     {
         return ($this->real_name ? $this->real_name : '@' . $this->name);
+    }
+
+    public function getReceivedPropsPerMonth()
+    {
+        return (DB::query()->where('receiver_id', $this->id)->from('slack_props')->groupBy(DB::raw('WEEK(created_at)'))->select(DB::raw('WEEK(created_at) AS KW, count(*) AS Ranking'))->get());
     }
 }

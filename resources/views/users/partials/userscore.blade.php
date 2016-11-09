@@ -3,6 +3,9 @@
 
 <canvas id="scoreChart"></canvas>
 
+
+<?php dd(json_encode($scoreboard));?>
+
 <script type="text/javascript">
 
     var ctx = document.getElementById("scoreChart");

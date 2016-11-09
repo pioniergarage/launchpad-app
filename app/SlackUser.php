@@ -28,6 +28,6 @@ class SlackUser extends Model
 
     public function getReceivedPropsPerMonth()
     {
-        return (DB::query()->where('receiver_id', $this->id)->from('slack_props')->groupBy(DB::raw('WEEK(created_at)'))->select(DB::raw('WEEK(created_at) AS KW, count(*) AS Ranking'))->get());
+        return (DB::query()->where('receiver_id', $this->id)->from('slack_props')->groupBy(DB::raw('WEEK(created_at)'))->select(DB::raw('WEEK(created_at) AS kw, count(*) AS ranking'))->get());
     }
 }

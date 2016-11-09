@@ -62,8 +62,10 @@
 
     <div class="row">
         <div class="col-md-12">
-            <!-- Chart area -->
-            @include('users.partials.chart')
+            <div class="box box-solid" style="padding: 20px;">
+                <!-- Chart area -->
+                @include('users.partials.userscore')
+            </div>
         </div>
     </div>
 @endsection

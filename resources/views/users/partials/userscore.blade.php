@@ -3,6 +3,28 @@
 
 <canvas id="scoreChart"></canvas>
 
+
+<?php
+$labels = array();
+$data = array();
+$sum = null;
+
+foreach ($scoreboard AS $score)
+{
+    //summation of the ranking
+    $sum = $sum + $score->ranking;
+
+    array_push($labels, $score->kw);
+    array_push($data, $sum);
+}
+
+$labels_fin = json_encode($labels);
+$data_fin = json_encode($data);
+
+        //dd($labels_fin);
+        //dd($labels_fin);
+?>
+
 <script type="text/javascript">
 
     var ctx = document.getElementById("scoreChart");
@@ -11,22 +33,14 @@
         data: {
 
             // TODO insert php variable with timestamp (array[string])
-            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            labels: <?php echo $labels_fin; ?>,
             datasets: [{
                 label: "Score",
                 backgroundColor: 'rgba(221, 75, 57, 1)',
                 borderColor: 'rgba(221, 75, 57, 0.4)',
 
                 // TODO insert php variable with score values (array[object})
-                data: [
-                    2,
-                    5,
-                    7,
-                    15,
-                    21,
-                    25,
-                    27,
-                ],
+                data: <?php echo $data_fin; ?>,
                 fill: false,
             }]
         },
@@ -55,7 +69,7 @@
                     display: true,
                     scaleLabel: {
                         display: true,
-                        labelString: 'Date'
+                        labelString: 'KW'
                     }
                 }],
                 yAxes: [{

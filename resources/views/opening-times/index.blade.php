@@ -11,6 +11,8 @@
 @endsection
 
 @section('content')
+    @include('layouts.partials.autoreloadalert')
+
     <div class="row">
         <div class="col-md-8">
             @foreach($openingTimes as $day => $daysOpeningTimes)
@@ -47,4 +49,15 @@
             @include('opening-times.partials.trafficlights')
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <!-- Autoreload feature -->
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                window.location.reload(false);
+            }, 60000); // once per minute
+        });
+    </script>
 @endsection

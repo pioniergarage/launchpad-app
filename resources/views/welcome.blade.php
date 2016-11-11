@@ -26,7 +26,7 @@
                         @foreach($ranking as $rank)
                             <tr>
                                 <td>
-                                    <a href="{!! action('DashboardController@userDetail', ['id' => $rank->user->id]) !!}">
+                                    <a href="{!! action('SlackUserController@show', ['user' => $rank->user]) !!}">
                                         {{ $rank->user->getName() }}
                                     </a>
                                 </td>

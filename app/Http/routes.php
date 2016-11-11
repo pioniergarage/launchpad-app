@@ -14,7 +14,7 @@
 Route::get('/', 'DashboardController@index');
 
 // user
-Route::get('/user/{username}', 'DashboardController@userDetail');
+Route::resource('user', 'SlackUserController');
 
 // import from slack
 Route::get('/slack', 'DashboardController@slack');

@@ -37,7 +37,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="{{ asset('/index2.html') }}" class="logo">
+        <a href="{{ asset('/') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini">LP<b>A</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -62,7 +62,6 @@
             <h1>
                 @yield('title', 'Untitled Page')
                 <small>@yield('subtitle', 'No description given')</small>
-                <script async defer src="https://launchpad-slack-inviter.herokuapp.com/slackin.js?large"></script>
             </h1>
             @yield('breadcrumbs')
         </section>
@@ -73,17 +72,19 @@
             <!-- Your Page Content Here -->
             @yield('content')
 
+            @include('layouts.partials.footercontent')
+
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
     <!-- Main Footer -->
-@include('layouts.partials.footer')
+    @include('layouts.partials.footer')
 
-<!-- Control Sidebar -->
-@include('layouts.partials.controlsidebar')
-<!-- /.control-sidebar -->
+    <!-- Control Sidebar -->
+    @include('layouts.partials.controlsidebar')
+    <!-- /.control-sidebar -->
     <!-- Add the sidebar's background. This div must be placed
          immediately after the control sidebar -->
     <div class="control-sidebar-bg"></div>

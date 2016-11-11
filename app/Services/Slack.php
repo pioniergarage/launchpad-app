@@ -111,8 +111,14 @@ class Slack
     public static function sendRanking()
     {
         $ranking = Ranking::getRanking();
-        $rankingWithText = array_map(function($rank){return '@' . $rank->user->name . ': ' . $rank->score;}, $ranking);
-        $text = "Das aktuelle Ranking ist:\n" . implode("\n", $rankingWithText);
+
+        $rankToRankingLine = function ($rank) {
+            // use getName to fetch real name if possible
+            // -> avoids pings for every ranking
+            return $rank->user->getName() . ': ' . $rank->score;
+        };
+        $rankingLines = array_map($rankToRankingLine, $ranking);
+        $text = "Das aktuelle Ranking ist:\n" . implode("\n", $rankingLines);
 
         $endpoint = 'https://slack.com/api/chat.postMessage?token=' . env('SLACK_TOKEN') . '&channel=' . env('SLACK_CHANNEL') . '&parse=full&text=' . urlencode($text);
         return json_decode(file_get_contents($endpoint));

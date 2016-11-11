@@ -26,16 +26,44 @@
 
     <!-- Sidebar Menu -->
     <ul class="sidebar-menu">
-        <li class="header">MAIN MENU</li>
+        <li class="header">Hauptmenü</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active">
+        <li>
             <a href="{{ asset('/') }}">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard"></i>
+                <span>Dashboard</span>
             </a>
         </li>
         <li>
             <a href="{!! action('OpeningTimeController@index') !!}">
-                <i class="fa fa-clock-o"></i> <span>Öffnungszeiten</span>
+                <i class="fa fa-clock-o"></i>
+                <span>Öffnungszeiten</span>
+            </a>
+        </li>
+        <!-- external links -->
+        <li class="header">Externe Links</li>
+        <li>
+            <a href="https://github.com/pioniergarage/launchpad-app" target="_blank">
+                <i class="fa fa-external-link"></i>
+                <span>Launchpad App auf Github</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://pioniergarage.de/launchpad" target="_blank">
+                <i class="fa fa-external-link"></i>
+                <span>Offizielle Launchpad-Seite</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://pioniergarage.de" target="_blank">
+                <i class="fa fa-external-link"></i>
+                <span>PionierGarage</span>
+            </a>
+        </li>
+        <li>
+            <a href="https://goo.gl/maps/5XKF2QPHTpL2" target="_blank">
+                <i class="fa fa-external-link"></i>
+                <span>Anfahrt</span>
             </a>
         </li>
     </ul>

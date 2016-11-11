@@ -69,11 +69,4 @@
             @include('opening-times.partials.trafficlights')
         </div>
     </div>
-
-    <hr>
-    <p>
-        <a class="btn btn-primary" href="{!! action('DashboardController@slack') !!}">
-            Rankings aus Slack importieren
-        </a>
-    </p>
 @endsection

@@ -25,7 +25,7 @@
             echo '<td>Montag</td>';
             echo '<td>Dienstag</td>';
             echo '<td>Mittwoch</td>';
-            echo '<td>MDonnerstag</td>';
+            echo '<td>Donnerstag</td>';
             echo '<td>Freitag</td>';
             echo '<td>Samstag</td>';
             echo '<td>Sonntag</td>';

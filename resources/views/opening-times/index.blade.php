@@ -13,6 +13,33 @@
 @section('content')
     @include('layouts.partials.autoreloadalert')
 
+    <!-- Estimated opening time box. -->
+    <div class="box box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title">Erwartete Öffnungszeit</h3>
+            <p>(Die Zeiten basieren auf historischen Daten und können stark abweichen.)</p>
+            <?php
+            //TODO: put css somewhere
+            echo '<table style="border: 1px solid black;" class="table table-bordered table-hover">';
+            echo '<tr>';
+            echo '<td>Montag</td>';
+            echo '<td>Dienstag</td>';
+            echo '<td>Mittwoch</td>';
+            echo '<td>Donnerstag</td>';
+            echo '<td>Freitag</td>';
+            echo '<td>Samstag</td>';
+            echo '<td>Sonntag</td>';
+            echo '</tr>';
+            echo '<tr>';
+            for($i = 0; $i < count($averageOpenPerWeekday); ++$i) {
+                echo '<td>' . $averageOpenPerWeekday[$i] . '</td>';
+            }
+            echo '</tr>';
+            echo '</table>'
+            ?>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-8">
             @foreach($openingTimes as $day => $daysOpeningTimes)

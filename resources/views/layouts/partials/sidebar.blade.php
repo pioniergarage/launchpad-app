@@ -42,7 +42,7 @@
         </li>
         <li>
             <a href="{!! action('CalendarController@index') !!}">
-                <i class="fa fa-clock-o"></i>
+                <i class="fa fa-calendar-check-o"></i>
                 <span>Reservierung</span>
             </a>
         </li>

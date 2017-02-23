@@ -40,6 +40,12 @@
                 <span>Öffnungszeiten</span>
             </a>
         </li>
+        <li>
+            <a href="{!! action('CalendarController@index') !!}">
+                <i class="fa fa-clock-o"></i>
+                <span>Reservierung</span>
+            </a>
+        </li>
         <!-- external links -->
         <li class="header">Externe Links</li>
         <li>

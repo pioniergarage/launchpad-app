@@ -15,20 +15,18 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-body">
-                    <div class="">
                         <div class="col-md-6 col-lg-4">
                             E-Mail: <b>reservations@pioniergarage.de</b>
                         </div>
                         <div class="col-md-6 col-lg-4">
                             Passwort: <b>reservation</b>
                         </div>
-                        <div class="col-sm-12">
-                        <p class="center">(Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)</p>
+                        <div class="col-sm-12" style="padding-bottom: 20px;">
+                            (Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)
                         </div>
                         <div>
-                            <iframe onload="iframeLoaded()" id="reservation-frame" src="http://www.skedda.com/account/login?" width="100%" height="90%" height: 100%; border: none"></iframe>
+                            <iframe id="reservation-frame" src="http://www.skedda.com/account/login?" width="100%" height="100%"></iframe>
                         </div>
-                    </div>
                 </div>
                 <!-- /.box-body -->
             </div>

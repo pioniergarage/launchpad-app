@@ -15,39 +15,51 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-body">
-                    <p class="center">E-Mail: <b>reservations@pioniergarage.de</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Passwort: <b>reservation</b></p>
-                    <p class="center">(Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)</p>
-                    <div>
-                        <iframe onload="iframeLoaded()" id="reservation-frame" src="http://www.skedda.com/account/login?" width="100%" height="90%" height: 100%; border: none"></iframe>
+                    <div class="">
+                        <div class="col-md-6 col-lg-4">
+                            E-Mail: <b>reservations@pioniergarage.de</b>
+                        </div>
+                        <div class="col-md-6 col-lg-4">
+                            Passwort: <b>reservation</b>
+                        </div>
+                        <div class="col-sm-12">
+                        <p class="center">(Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)</p>
+                        </div>
+                        <div>
+                            <iframe onload="iframeLoaded()" id="reservation-frame" src="http://www.skedda.com/account/login?" width="100%" height="90%" height: 100%; border: none"></iframe>
+                        </div>
                     </div>
                 </div>
                 <!-- /.box-body -->
             </div>
         </div>
     </div>
+@endsection
 
-    <script>
-        var buffer = 20; //scroll bar buffer
-        var iframe = document.getElementById('reservation-frame');
+@section('scripts')
+<script>
+    // adjust iframe
+    var buffer = 20; //scroll bar buffer
+    var iframe = document.getElementById('reservation-frame');
 
-        function pageY(elem) {
-            return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
-        }
+    function pageY(elem) {
+        return elem.offsetParent ? (elem.offsetTop + pageY(elem.offsetParent)) : elem.offsetTop;
+    }
 
-        function resizeIframe() {
-            var height = document.documentElement.clientHeight;
-            height -= pageY(document.getElementById('reservation-frame'))+ buffer ;
-            height = (height < 0) ? 0 : height;
-            document.getElementById('reservation-frame').style.height = height + 'px';
-        }
+    function resizeIframe() {
+        var height = document.documentElement.clientHeight;
+        height -= pageY(document.getElementById('reservation-frame'))+ buffer ;
+        height = (height < 0) ? 0 : height;
+        document.getElementById('reservation-frame').style.height = height + 'px';
+    }
 
-        // .onload doesn't work with IE8 and older.
-        if (iframe.attachEvent) {
-            iframe.attachEvent("onload", resizeIframe);
-        } else {
-            iframe.onload=resizeIframe;
-        }
+    // .onload doesn't work with IE8 and older.
+    if (iframe.attachEvent) {
+        iframe.attachEvent("onload", resizeIframe);
+    } else {
+        iframe.onload=resizeIframe;
+    }
 
-        window.onresize = resizeIframe;
-    </script>
+    window.onresize = resizeIframe;
+</script>
 @endsection

@@ -6,10 +6,10 @@
 @section('stylesheets')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('/plugins/select2/select2.min.css') }}">
-    <!-- daterange picker -->
-    <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
     <!-- bootstrap datepicker -->
     <link rel="stylesheet" href="{{ asset('/plugins/datepicker/datepicker3.css') }}">
+    <!-- Bootstrap time Picker -->
+    <link rel="stylesheet" href="{{ asset('/plugins/timepicker/bootstrap-timepicker.min.css') }}">
 @endsection
 
 @section('breadcrumbs')
@@ -49,6 +49,17 @@
                 </div>
                 <div class="box-body">
 
+                    <!-- name -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input class="form-control" id="name" placeholder="Bitte gib Deinen Namen ein" type="text">
+                    </div>
+                    <!-- mail address -->
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Mail</label>
+                        <input class="form-control" id="mail" placeholder="Bitte gib Deine Mail-Adresse ein" type="email">
+                    </div>
+
                     <!-- choice of space-->
                     <div class="form-group">
                         <label>Raumwahl</label>
@@ -68,26 +79,28 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-calendar"></i>
                             </div>
-                            <input class="form-control pull-right" id="datepicker" type="text">
+                            <input class="form-control pull-right" id="reservationdate" type="text">
                         </div>
                         <!-- /.input group -->
                     </div>
                     <!-- /.form group -->
 
-                    <!-- Date and time range -->
-                    <div class="form-group">
-                        <label>Zeitraum:</label>
+                    <!-- time Picker -->
+                    <div class="bootstrap-timepicker">
+                        <div class="form-group">
+                            <label>Time picker:</label>
 
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-clock-o"></i>
+                            <div class="input-group">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-clock-o"></i>
+                                </div>
+                                <input id="startingtime" type="text" class="form-control">
+
                             </div>
-                            <input class="form-control pull-right" id="reservationtimerange" type="text">
+                            <!-- /.input group -->
                         </div>
-                        <!-- /.input group -->
+                        <!-- /.form group -->
                     </div>
-                    <!-- /.form group -->
-
 
                 </div>
                 <!-- /.box-body -->
@@ -100,11 +113,10 @@
 
 <!-- Select2 -->
 <script src="{{ asset('/plugins/select2/select2.full.min.js') }}"></script>
-<!-- date-range-picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="{{ asset('/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- bootstrap datepicker -->
 <script src="{{ asset('/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+<!-- bootstrap time picker -->
+<script src="{{ asset('/plugins/timepicker/bootstrap-timepicker.min.js') }}"></script>
 
 <script>
     // adjust iframe
@@ -137,29 +149,16 @@
         //Initialize Select2 Elements
         $(".select2").select2();
 
-        //Datemask dd/mm/yyyy
-        $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
-        //Datemask2 mm/dd/yyyy
-        $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
-        //Money Euro
-        $("[data-mask]").inputmask();
-
-
-        //Date range picker with time picker
-        $('#reservationtimerange').daterangepicker(
-           // {timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'}
-        );
-
-
-        //Date picker
-        $('#datepicker').datepicker({
+        $('#reservationdate').datepicker({
             autoclose: true
         });
 
-
-
         //Timepicker
-        $(".timepicker").timepicker({
+        $("#startingtime").timepicker({
+            showInputs: false,
+            showMeridian: false,
+        });
+        $("#endtime").timepicker({
             showInputs: false
         });
     });

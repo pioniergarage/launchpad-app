@@ -6,6 +6,10 @@
 @section('stylesheets')
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('/plugins/select2/select2.min.css') }}">
+    <!-- daterange picker -->
+    <link rel="stylesheet" href="{{ asset('/plugins/daterangepicker/daterangepicker.css') }}">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="{{ asset('/plugins/datepicker/datepicker3.css') }}">
 @endsection
 
 @section('breadcrumbs')
@@ -52,7 +56,7 @@
                             <option selected="selected">Konferenzraum</option>
                             <option>Tisch 1 - Coworking Space</option>
                             <option>Tisch 2 - Coworking Space</option>
-                            <option disabled="disabled">Coworking Space</option>
+                            <option disabled="disabled">Coworking Space (nicht komplett reservierbar)</option>
                         </select>
                     </div>
 
@@ -78,7 +82,7 @@
                             <div class="input-group-addon">
                                 <i class="fa fa-clock-o"></i>
                             </div>
-                            <input class="form-control pull-right" id="reservationtime" type="text">
+                            <input class="form-control pull-right" id="reservationtimerange" type="text">
                         </div>
                         <!-- /.input group -->
                     </div>
@@ -93,6 +97,15 @@
 @endsection
 
 @section('scripts')
+
+<!-- Select2 -->
+<script src="{{ asset('/plugins/select2/select2.full.min.js') }}"></script>
+<!-- date-range-picker -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+<script src="{{ asset('/plugins/daterangepicker/daterangepicker.js') }}"></script>
+<!-- bootstrap datepicker -->
+<script src="{{ asset('/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+
 <script>
     // adjust iframe
     var buffer = 20; //scroll bar buffer
@@ -131,28 +144,12 @@
         //Money Euro
         $("[data-mask]").inputmask();
 
-        //Date range picker
-        $('#reservation').daterangepicker();
+
         //Date range picker with time picker
-        $('#reservationtime').daterangepicker({timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'});
-        //Date range as a button
-        $('#daterange-btn').daterangepicker(
-            {
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            },
-            function (start, end) {
-                $('#daterange-btn span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
-            }
+        $('#reservationtimerange').daterangepicker(
+           // {timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A'}
         );
+
 
         //Date picker
         $('#datepicker').datepicker({
@@ -168,10 +165,4 @@
     });
 </script>
 
-<!-- Select2 -->
-<script src="{{ asset('/plugins/select2/select2.full.min.js') }}"></script>
-
-<!-- date-range-picker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-<script src="{{ asset('/plugins/daterangepicker/daterangepicker.js') }}"></script>
 @endsection

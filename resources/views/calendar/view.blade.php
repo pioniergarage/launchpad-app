@@ -150,7 +150,12 @@
         $(".select2").select2();
 
         $('#reservationdate').datepicker({
-            autoclose: true
+            autoclose: true,
+            format: 'dd/mm/yyyy',
+            language : "de",
+            todayHighlight : true,
+            weekStart : 1,
+            todayBtn: true,
         });
 
         //Timepicker

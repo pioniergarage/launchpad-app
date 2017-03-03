@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{{ asset('/plugins/datepicker/datepicker3.css') }}">
     <!-- Bootstrap time Picker -->
     <link rel="stylesheet" href="{{ asset('/plugins/timepicker/bootstrap-timepicker.min.css') }}">
+    <!-- form customization -->
+    <link rel="stylesheet" href="{{ asset('/dist/css/form_style.css') }}">
 @endsection
 
 @section('breadcrumbs')
@@ -34,7 +36,7 @@
                             (Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)
                         </div>
                         <div>
-                            <iframe id="reservation-frame" src="http://www.skedda.com/account/login?" width="100%" height="100%"></iframe>
+                            <iframe id="reservation-frame" src="https://pioniergarage.skedda.com/booking"" width="100%" height="100%"></iframe>
                         </div>
                 </div>
                 <!-- /.box-body -->
@@ -85,22 +87,51 @@
                     </div>
                     <!-- /.form group -->
 
-                    <!-- time Picker -->
-                    <div class="bootstrap-timepicker">
-                        <div class="form-group">
-                            <label>Time picker:</label>
+                    <div class="col-sm-6 form-input-field-left">
+                        <!-- starting time -->
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Von:</label>
 
-                            <div class="input-group">
-                                <div class="input-group-addon">
-                                    <i class="fa fa-clock-o"></i>
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input id="startingtime" type="text" class="form-control">
+
                                 </div>
-                                <input id="startingtime" type="text" class="form-control">
-
+                                <!-- /.input group -->
                             </div>
-                            <!-- /.input group -->
+                            <!-- /.form group -->
                         </div>
-                        <!-- /.form group -->
                     </div>
+
+                    <div class="col-sm-6 form-input-field-right">
+                        <!-- end time -->
+                        <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                                <label>Bis:</label>
+
+                                <div class="input-group">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-clock-o"></i>
+                                    </div>
+                                    <input id="endtime" type="text" class="form-control">
+
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                            <!-- /.form group -->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Weitere Amerkungen:</label>
+                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                    </div>
+
+                    <!-- button -->
+                    <button type="button" class="btn btn-block btn-danger">Absenden</button>
 
                 </div>
                 <!-- /.box-body -->
@@ -151,7 +182,7 @@
 
         $('#reservationdate').datepicker({
             autoclose: true,
-            format: 'dd/mm/yyyy',
+            format: 'dd.mm.yyyy',
             language : "de",
             todayHighlight : true,
             weekStart : 1,
@@ -164,7 +195,8 @@
             showMeridian: false,
         });
         $("#endtime").timepicker({
-            showInputs: false
+            showInputs: false,
+            showMeridian: false,
         });
     });
 </script>

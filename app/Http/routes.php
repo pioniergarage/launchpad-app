@@ -29,3 +29,6 @@ Route::get('calendar', 'CalendarController@index');
 Route::get('api/door/change-status', 'DoorController@changeStatusLegacy');
 Route::get('door/change-status', 'DoorController@changeStatus');
 
+//Reservation Request
+Route::get('reservation_req', 'CalendarController@submitForm');
+

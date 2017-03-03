@@ -26,24 +26,19 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-body">
-                        <div class="col-md-6 col-lg-4">
-                            E-Mail: <b>reservations@pioniergarage.de</b>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            Passwort: <b>reservation</b>
-                        </div>
-                        <div class="col-sm-12" style="padding-bottom: 20px;">
-                            (Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)
-                        </div>
+                       <div>
+                           <a href="#" id="opener"><button type="button" class="btn btn-block btn-danger reservation-btn">Hier reservieren</button></a>
+                       </div>
+
                         <div>
-                            <iframe id="reservation-frame" src="https://pioniergarage.skedda.com/booking"" width="100%" height="100%"></iframe>
+                            <iframe id="reservation-frame" src="https://pioniergarage.skedda.com/booking" width="100%" height="100%"></iframe>
                         </div>
                 </div>
                 <!-- /.box-body -->
             </div>
         </div>
     </div>
-    <div class="row">
+    <div id="lightbox" class="row form-lightbox">
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header">
@@ -53,12 +48,12 @@
 
                     <!-- name -->
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Name</label>
+                        <label for="name">Name</label>
                         <input class="form-control" id="name" placeholder="Bitte gib Deinen Namen ein" type="text">
                     </div>
                     <!-- mail address -->
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Mail</label>
+                        <label for="mail">Mail</label>
                         <input class="form-control" id="mail" placeholder="Bitte gib Deine Mail-Adresse ein" type="email">
                     </div>
 
@@ -127,11 +122,11 @@
 
                     <div class="form-group">
                         <label>Weitere Amerkungen:</label>
-                        <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        <textarea class="form-control" cols="1" placeholder="Hier ist Platz für Anmerkungen ..." style="resize: vertical;"></textarea>
                     </div>
 
                     <!-- button -->
-                    <button type="button" class="btn btn-block btn-danger">Absenden</button>
+                    <button type="button" class="btn btn-block btn-danger" style="font-weight: bold;">Absenden</button>
 
                 </div>
                 <!-- /.box-body -->
@@ -187,6 +182,7 @@
             todayHighlight : true,
             weekStart : 1,
             todayBtn: true,
+            startDate: new Date(),
         });
 
         //Timepicker
@@ -199,6 +195,50 @@
             showMeridian: false,
         });
     });
+</script>
+<script>
+    //form popup script
+
+    var opener = document.getElementById("opener");
+
+    opener.onclick = function(){
+
+        var lightbox = document.getElementById('lightbox'),
+            dimmer = document.createElement("div");
+
+        dimmer.style.height = window.innerHeight + 'px';
+        dimmer.className = 'dimmer';
+
+        dimmer.onclick = function(){
+            document.body.removeChild(this);
+            lightbox.style.visibility = 'hidden';
+        }
+
+        document.body.appendChild(dimmer);
+
+        lightbox.style.visibility = 'visible';
+
+        setFormPosition();
+
+
+        return false;
+    }
+
+    function setFormPosition() {
+
+        var lightbox = document.getElementById('lightbox');
+
+        var lightbox_width = window.innerWidth*0.8;
+
+        lightbox.style.width = lightbox_width + 'px';
+        lightbox.style.marginLeft = -lightbox_width/2 + 'px';
+
+        //lightbox.style.marginTop = -lightbox_width/2 + 'px';
+
+    }
+
+    //resize lightbox when window is resized
+    window.addEventListener('resize', setFormPosition);
 </script>
 
 @endsection

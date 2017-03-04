@@ -45,6 +45,14 @@
                     <h3 class="box-title">Reservierungsanfrage</h3>
                 </div>
                 <div class="box-body">
+
+                    <!-- error log -->
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+
                     {{ Form::open(array('route' => 'reservation-request', 'class' => 'form')) }}
 
                         <!-- CSRF Protection -->
@@ -53,18 +61,16 @@
                         <!-- name -->
                         <div class="form-group">
                             {!! Form::label('name', 'Name') !!}
-                            {!! Form::text(null, null,
-                                array('required',
-                                      'class'=>'form-control',
+                            {!! Form::text('name', null,
+                                array('class'=>'form-control',
                                       'placeholder'=>'Bitte gib Deinen Namen ein',
                                       'id' => 'name')) !!}
                         </div>
                         <!-- mail address -->
                         <div class="form-group">
                             {!! Form::label('mail', 'Mail') !!}
-                            {!! Form::email(null, null,
-                                array('required',
-                                      'class'=>'form-control',
+                            {!! Form::email('mail', null,
+                                array('class'=>'form-control',
                                       'placeholder'=>'Bitte gib Deine Mail-Adresse ein',
                                       'id' => 'mail')) !!}
                         </div>
@@ -73,7 +79,7 @@
                         <div class="form-group">
                             {!! Form::label('choiceOfSpace', 'Raumwahl') !!}
 
-                            {!! Form::select(null,
+                            {!! Form::select('choiceOfSpace',
                                 array('R1' => 'Konferenzraum',
                                         'R2' => 'Tisch 1 - Coworking Space',
                                         'R3' => 'Tisch 2 - Coworking Space',
@@ -96,9 +102,8 @@
                                 <div class="input-group-addon">
                                     <i class="fa fa-calendar"></i>
                                 </div>
-                                {!! Form::text(null, null,
-                                array('required',
-                                      'class'=>'form-control pull-right',
+                                {!! Form::text('reservationdate', null,
+                                array('class'=>'form-control pull-right',
                                       'id' => 'reservationdate')) !!}
                             </div>
                             <!-- /.input group -->
@@ -115,10 +120,9 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
-                                        {!! Form::text(null, null,
-                                        array('required',
-                                        'class'=>'form-control',
-                                        'id' => 'startingtime')) !!}
+                                        {!! Form::text('startingtime', null,
+                                        array('class'=>'form-control',
+                                            'id' => 'startingtime')) !!}
                                     </div>
                                     <!-- /.input group -->
                                 </div>
@@ -136,9 +140,8 @@
                                         <div class="input-group-addon">
                                             <i class="fa fa-clock-o"></i>
                                         </div>
-                                        {!! Form::text(null, null,
-                                           array('required',
-                                           'class'=>'form-control',
+                                        {!! Form::text('endtime', null,
+                                           array('class'=>'form-control',
                                             'id' => 'endtime')) !!}
                                     </div>
                                     <!-- /.input group -->
@@ -150,7 +153,7 @@
                         <div class="form-group">
                             {!! Form::label('additional-information', 'Weitere Amerkungen') !!}
 
-                            {!! Form::textarea(null, null,
+                            {!! Form::textarea('additional-information', null,
                                    array('class'=>'form-control',
                                     'id' => 'additional-information',
                                     'size' => '1x2',

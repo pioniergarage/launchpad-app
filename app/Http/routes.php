@@ -31,4 +31,4 @@ Route::get('door/change-status', 'DoorController@changeStatus');
 
 //Reservation Request
 Route::post('reservation',
-    ['as' => 'reservation-request', 'uses' => 'CalendarController@testFunction']);
+    ['as' => 'reservation-request', 'uses' => 'CalendarController@submitForm']);

@@ -45,89 +45,125 @@
                     <h3 class="box-title">Reservierungsanfrage</h3>
                 </div>
                 <div class="box-body">
+                    {{ Form::open(array('route' => 'reservation-request', 'class' => 'form')) }}
 
-                    <!-- name -->
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class="form-control" id="name" placeholder="Bitte gib Deinen Namen ein" type="text">
-                    </div>
-                    <!-- mail address -->
-                    <div class="form-group">
-                        <label for="mail">Mail</label>
-                        <input class="form-control" id="mail" placeholder="Bitte gib Deine Mail-Adresse ein" type="email">
-                    </div>
+                        <!-- CSRF Protection -->
+                        <?php echo Form::token(); ?>
 
-                    <!-- choice of space-->
-                    <div class="form-group">
-                        <label>Raumwahl</label>
-                        <select class="form-control select2 select2-hidden-accessible" style="width: 100%;" tabindex="-1" aria-hidden="true">
-                            <option selected="selected">Konferenzraum</option>
-                            <option>Tisch 1 - Coworking Space</option>
-                            <option>Tisch 2 - Coworking Space</option>
-                            <option disabled="disabled">Coworking Space (nicht komplett reservierbar)</option>
-                        </select>
-                    </div>
-
-                    <!-- Date -->
-                    <div class="form-group">
-                        <label>Datum:</label>
-
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input class="form-control pull-right" id="reservationdate" type="text">
+                        <!-- name -->
+                        <div class="form-group">
+                            {!! Form::label('name', 'Name') !!}
+                            {!! Form::text(null, null,
+                                array('required',
+                                      'class'=>'form-control',
+                                      'placeholder'=>'Bitte gib Deinen Namen ein',
+                                      'id' => 'name')) !!}
                         </div>
-                        <!-- /.input group -->
-                    </div>
-                    <!-- /.form group -->
+                        <!-- mail address -->
+                        <div class="form-group">
+                            {!! Form::label('mail', 'Mail') !!}
+                            {!! Form::email(null, null,
+                                array('required',
+                                      'class'=>'form-control',
+                                      'placeholder'=>'Bitte gib Deine Mail-Adresse ein',
+                                      'id' => 'mail')) !!}
+                        </div>
 
-                    <div class="col-sm-6 form-input-field-left">
-                        <!-- starting time -->
-                        <div class="bootstrap-timepicker">
-                            <div class="form-group">
-                                <label>Von:</label>
+                        <!-- choice of space-->
+                        <div class="form-group">
+                            {!! Form::label('choiceOfSpace', 'Raumwahl') !!}
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-clock-o"></i>
-                                    </div>
-                                    <input id="startingtime" type="text" class="form-control">
+                            {!! Form::select(null,
+                                array('R1' => 'Konferenzraum',
+                                        'R2' => 'Tisch 1 - Coworking Space',
+                                        'R3' => 'Tisch 2 - Coworking Space',
+                                ),
+                                'R1',
+                                array('class' => 'form-control select2 select2-hidden-accessible',
+                                        'id' => 'choiceOfSpace',
+                                        'style' => 'width: 100%;',
+                                        'tabindex' => '-1',
+                                        'aria-hidden' => 'true'
+                                )
+                            )  !!}
+                        </div>
 
+                        <!-- Date -->
+                        <div class="form-group">
+                            {!! Form::label('reservationdate', 'Datum') !!}
+
+                            <div class="input-group date">
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
                                 </div>
-                                <!-- /.input group -->
+                                {!! Form::text(null, null,
+                                array('required',
+                                      'class'=>'form-control pull-right',
+                                      'id' => 'reservationdate')) !!}
                             </div>
-                            <!-- /.form group -->
+                            <!-- /.input group -->
                         </div>
-                    </div>
+                        <!-- /.form group -->
 
-                    <div class="col-sm-6 form-input-field-right">
-                        <!-- end time -->
-                        <div class="bootstrap-timepicker">
-                            <div class="form-group">
-                                <label>Bis:</label>
+                        <div class="col-sm-6 form-input-field-left">
+                            <!-- starting time -->
+                            <div class="bootstrap-timepicker">
+                                <div class="form-group">
+                                    {!! Form::label('startingtime', 'Von') !!}
 
-                                <div class="input-group">
-                                    <div class="input-group-addon">
-                                        <i class="fa fa-clock-o"></i>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        {!! Form::text(null, null,
+                                        array('required',
+                                        'class'=>'form-control',
+                                        'id' => 'startingtime')) !!}
                                     </div>
-                                    <input id="endtime" type="text" class="form-control">
-
+                                    <!-- /.input group -->
                                 </div>
-                                <!-- /.input group -->
+                                <!-- /.form group -->
                             </div>
-                            <!-- /.form group -->
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Weitere Amerkungen:</label>
-                        <textarea class="form-control" cols="1" placeholder="Hier ist Platz für Anmerkungen ..." style="resize: vertical;"></textarea>
-                    </div>
+                        <div class="col-sm-6 form-input-field-right">
+                            <!-- end time -->
+                            <div class="bootstrap-timepicker">
+                                <div class="form-group">
+                                    {!! Form::label('endtime', 'Bis') !!}
 
-                    <!-- button -->
-                    <button type="button" class="btn btn-block btn-danger" style="font-weight: bold;">Absenden</button>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        {!! Form::text(null, null,
+                                           array('required',
+                                           'class'=>'form-control',
+                                            'id' => 'endtime')) !!}
+                                    </div>
+                                    <!-- /.input group -->
+                                </div>
+                                <!-- /.form group -->
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            {!! Form::label('additional-information', 'Weitere Amerkungen') !!}
+
+                            {!! Form::textarea(null, null,
+                                   array('class'=>'form-control',
+                                    'id' => 'additional-information',
+                                    'size' => '1x2',
+                                    'placeholder' => 'Hier ist Platz f&uuml;r Anmerkungen ...',
+                                    'style' => 'resize: vertical;')) !!}
+                        </div>
+
+                        <!-- button -->
+                        {!! Form::submit('Absenden',
+                                   array('class'=>'btn btn-block btn-danger',
+                                    'style' => 'font-weight: bold;')) !!}
+
+                        {{ Form::close() }}
                 </div>
                 <!-- /.box-body -->
             </div>

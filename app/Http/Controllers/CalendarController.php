@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Mail;
 use App\Http\Requests\ReservationFormRequest;
-use phpDocumentor\Reflection\Types\Array_;
+
 
 
 class CalendarController extends Controller
@@ -23,13 +23,10 @@ class CalendarController extends Controller
             'Bis' => $request->get('endtime'),
             'Anmerkungen' => $request->get('additional-information'));
 
-        //$this->sendReservationMail($data);
-
-        return dd($data);
+        $this->sendReservationMail($data);
 
 
-        //return \Redirect::route('reservation')
-        //    ->with('message', 'Thanks for contacting us!');
+        return redirect()->route('calendar');
 
 
     }

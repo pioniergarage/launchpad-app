@@ -46,13 +46,6 @@
                 </div>
                 <div class="box-body">
 
-                    <!-- error log -->
-                    <ul>
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-
                     {{ Form::open(array('route' => 'reservation-request', 'class' => 'form')) }}
 
                         <!-- CSRF Protection -->
@@ -62,7 +55,8 @@
                         <div class="form-group">
                             {!! Form::label('name', 'Name') !!}
                             {!! Form::text('name', null,
-                                array('class'=>'form-control',
+                                array('required',
+                                       'class'=>'form-control',
                                       'placeholder'=>'Bitte gib Deinen Namen ein',
                                       'id' => 'name')) !!}
                         </div>
@@ -70,7 +64,8 @@
                         <div class="form-group">
                             {!! Form::label('mail', 'Mail') !!}
                             {!! Form::email('mail', null,
-                                array('class'=>'form-control',
+                                array('required',
+                                      'class'=>'form-control',
                                       'placeholder'=>'Bitte gib Deine Mail-Adresse ein',
                                       'id' => 'mail')) !!}
                         </div>
@@ -103,7 +98,8 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 {!! Form::text('reservationdate', null,
-                                array('class'=>'form-control pull-right',
+                                array('required',
+                                      'class'=>'form-control pull-right',
                                       'id' => 'reservationdate')) !!}
                             </div>
                             <!-- /.input group -->
@@ -164,7 +160,8 @@
                         <!-- button -->
                         {!! Form::submit('Absenden',
                                    array('class'=>'btn btn-block btn-danger',
-                                    'style' => 'font-weight: bold;')) !!}
+                                    'style' => 'font-weight: bold;',
+                                    'id' => 'submitButton')) !!}
 
                         {{ Form::close() }}
                 </div>
@@ -278,6 +275,7 @@
 
     //resize lightbox when window is resized
     window.addEventListener('resize', setFormPosition);
+
 </script>
 
 @endsection

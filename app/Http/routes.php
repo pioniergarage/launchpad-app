@@ -24,7 +24,8 @@ Route::resource('opening-times', 'OpeningTimeController');
 Route::get('api/opening-times/current', 'OpeningTimeController@apiCurrent');
 
 //calendar
-Route::get('calendar', 'CalendarController@index');
+Route::get('calendar',
+    ['as' => 'calendar', 'uses' => 'CalendarController@index']);
 
 Route::get('api/door/change-status', 'DoorController@changeStatusLegacy');
 Route::get('door/change-status', 'DoorController@changeStatus');

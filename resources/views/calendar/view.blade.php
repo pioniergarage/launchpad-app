@@ -11,21 +11,17 @@
 @endsection
 
 @section('content')
+    <div class="alert alert-info">
+        <strong>Hier</strong>
+        kannst du Teile des Launchpads für dich Reservieren. Dabei hast du die Möglichkeit, bis zu zwei Tische im Coworking Space oder den Konferenzraum für bis zu 4 Stunden zu reservieren. Ab 17.00 Uhr kannst du zusätzlich den kompletten Coworking Space reservieren.
+    </div>
+
     <div class="row">
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-body">
-                        <div class="col-md-6 col-lg-4">
-                            E-Mail: <b>reservations@pioniergarage.de</b>
-                        </div>
-                        <div class="col-md-6 col-lg-4">
-                            Passwort: <b>reservation</b>
-                        </div>
-                        <div class="col-sm-12" style="padding-bottom: 20px;">
-                            (Nutze den Standardbenutzer um eine Reservierung vorzunehmen.)
-                        </div>
                         <div>
-                            <iframe id="reservation-frame" src="http://www.skedda.com/account/login?" width="100%" height="100%"></iframe>
+                            <iframe id="reservation-frame" src="https://pioniergarage.skedda.com/" width="100%" height="100%"></iframe>
                         </div>
                 </div>
                 <!-- /.box-body -->
@@ -47,7 +43,14 @@
     function resizeIframe() {
         var height = document.documentElement.clientHeight;
         height -= pageY(document.getElementById('reservation-frame'))+ buffer ;
-        height = (height < 0) ? 0 : height;
+
+        //iframe min height 700px
+        if(height < 700){
+            height = 700;
+        }else{
+            height = height;
+        }
+
         document.getElementById('reservation-frame').style.height = height + 'px';
     }
 

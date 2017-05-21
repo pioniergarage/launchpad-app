@@ -20,6 +20,9 @@
     -->
     <link rel="stylesheet" href="{{ asset('/dist/css/skins/skin-red.min.css') }}">
 
+    <!-- customized style -->
+    @yield('stylesheets')
+
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('/img/favicon.ico') }}">
 
